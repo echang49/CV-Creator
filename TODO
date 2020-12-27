@@ -1,0 +1,13 @@
+STAGE 1
+    Add the 500 words to the qualityarray in nlp.py (https://www.jobscan.co/blog/top-resume-keywords-boost-resume/)
+
+STAGE 2
+    Make UI/UX
+    Handle multiple profiles
+    Accept both docx and pdf (Only accept 1 file => cover letter)
+    Cover letter is converted txt file
+    Txt is brought up and user can choose where [NOUN],[ADJECTIVE],and[VERB] go
+
+STAGE 3
+    Bundle into .exe
+    Turn into desktop app through electron
