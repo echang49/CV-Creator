@@ -1,5 +1,6 @@
 STAGE 1
     Add the 500 words to the qualityarray in nlp.py (https://www.jobscan.co/blog/top-resume-keywords-boost-resume/)
+    COPY AND PASTE TEXT
 
 STAGE 2
     Make UI/UX
@@ -7,6 +8,9 @@ STAGE 2
     Accept both docx and pdf (Only accept 1 file => cover letter)
     Cover letter is converted txt file
     Txt is brought up and user can choose where [NOUN],[ADJECTIVE],and[VERB] go
+    MAKE RESPONSIVE (minimum 1025px);
+    connect all the pieces (finish sidebar.js,)
+    Make help.js help video, edit.js, and finished.js
 
 STAGE 3
     Bundle into .exe

@@ -1,0 +1,284 @@
+//Composition
+
+/* playfair-display-regular - latin */
+@font-face {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('../fonts/playfair-display-v21-latin-regular.woff2') format('woff2'); /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+/* playfair-display-900 - latin */
+@font-face {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 900;
+    src: local(''),
+         url('../fonts/playfair-display-v21-latin-900.woff2') format('woff2'); /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+/* source-sans-pro-200 - latin */
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 200;
+    src: local(''),
+         url('../fonts/source-sans-pro-v14-latin-200.woff2') format('woff2'); /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+/* source-sans-pro-regular - latin */
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('../fonts/source-sans-pro-v14-latin-regular.woff2') format('woff2'); /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+/* source-sans-pro-600 - latin */
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 600;
+    src: local(''),
+         url('../fonts/source-sans-pro-v14-latin-600.woff2') format('woff2'); /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+/* source-sans-pro-900 - latin */
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 900;
+    src: local(''),
+         url('../fonts/source-sans-pro-v14-latin-900.woff2') format('woff2'); /* Chrome 26+, Opera 23+, Firefox 39+ */
+}
+
+$light: hsl(0,0,95);
+$dark-green: #264653;
+$light-green: #3A6678;
+
+body {
+    margin: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    font-size: 40px;
+}
+
+ul {
+
+}
+
+li {
+
+}
+
+//Utility
+
+.bold {
+    all: unset;
+    color: #FFF!important;
+    &:hover {
+        font-weight: 600;
+        cursor: pointer;
+    }
+} 
+
+.mr-20 {
+    margin-right: 20px;
+}
+
+.icon {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.blur {
+    filter: blur(4px);
+    pointer-events: none;
+}
+
+//Block
+
+.main {
+    display: flex;
+    flex-direction: row;
+}
+
+.sidebar {
+    height: 100vh;
+    width: 25vw;
+    min-width: 450px;
+    background-color: $dark-green;
+    color: #FFF;
+    display: flex;
+    .container {
+        padding: 25px 75px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+        .container-child {
+            flex-grow: 1;
+            .sidebar-header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                .title {
+                    font-weight: 900;
+                    letter-spacing: 5px;
+                    font-size: 60px;
+                    margin: 25px 0;
+                }
+            }
+            .sidebar-body {
+                .list {
+                    margin-left: 50px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    p {
+                        margin: 25px 0;
+                        max-width: 20ch;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                    }
+                }
+            }
+        }
+        
+        .sidebar-footer {
+            align-self: center;
+            text-align: center;
+            font-size: 20px;
+            max-width: 40ch;
+        }
+    }
+}
+
+.body {
+    background-color: $light;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 75px;
+    .body-default {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .body-posting {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.help {
+    z-index: 1;
+    position: absolute;
+    bottom: 50px;
+    right: 100px;
+    &:hover {
+        cursor: pointer;
+        filter: drop-shadow(1px 1px 1px hsl(0,0,20));
+    }
+    
+}
+
+.default {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p {
+        margin: 10px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 60px;
+    }
+}
+
+.posting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .title {
+        font-weight: 600;
+        letter-spacing: 5px;
+        font-size: 60px;
+        margin: 25px 0;
+    }
+    .flex-row {
+        display: flex;
+        flex-direction: row;
+        margin-top: 50px;
+    }
+    button {
+        all: unset;
+        cursor: pointer;
+        padding: 10px 40px;
+        margin: 0 20px;
+        border-radius: 10px;
+        color: $light;
+        background-color: $dark-green;
+        &:hover {
+            background-color: $light-green;
+        }
+    }
+    .posting-body {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        input[type=text] {
+            margin: 50px;
+            font-size: 40px;
+            padding: 20px 50px;
+        }
+    }
+}
+
+.popup {
+    z-index: 10;
+    width: 75vw;
+    height: 50vh;
+    background-color: #FFF;
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    border-radius: 10px;
+    margin: auto;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+    padding: 20px 50px;
+    .flex-column {
+        display: flex;
+        flex-direction: column;
+        .flex-row {
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+        }
+        button {
+            all: unset;
+            cursor: pointer;
+            padding: 10px 40px;
+            margin: 0 20px;
+            border-radius: 10px;
+            color: $light;
+            background-color: $dark-green;
+            &:hover {
+                background-color: $light-green;
+            }
+        }
+        .delete {
+            cursor: pointer;
+            align-self: flex-end;
+        }
+    }
+
+    
+    
+}
+
+//Exception
