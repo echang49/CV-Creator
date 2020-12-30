@@ -7,25 +7,28 @@ function Add({ setPopupShow, mainRef }) {
         mainRef.current.classList.remove('blur');
     }
 
+    function next() {
+
+    }
 
     return(
-        <div className="popup">
+        <div className="popup" id="add">
             <div className="flex-column">
                 <div className="delete">
                     <Close onClick={() => close()} />
                 </div>
+                <p className="title">Create New Profile</p>
                 <div className="flex-row">
-                    <label>
-                        Name:
-                        <input type="text" name="name" />
-                    </label>  
+                    <label>Name: </label>
+                    <input type="text" />
                 </div>
-                <div className="flex-row">
-                    <button type="button class=btn" >
-                        
-                        Upload Cover Letter:
-                    </button>
+                <div className="flex-row" style={{flexGrow : 1}}>
+                    <label>Upload Cover Letter: </label>
+                    <input type="file" />
                 </div>   
+                <div className="button">
+                    <button onClick={() => next()} >Next</button>
+                </div>
             </div>
         </div>
 

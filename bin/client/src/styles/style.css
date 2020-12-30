@@ -83,6 +83,50 @@ body {
   pointer-events: none;
 }
 
+.popup {
+  z-index: 10;
+  background-color: #FFF;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 10px;
+  margin: auto;
+  -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+          box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.popup .flex-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.popup .flex-column button {
+  all: unset;
+  cursor: pointer;
+  padding: 10px 40px;
+  margin: 0 20px;
+  border-radius: 10px;
+  color: #f2f2f2;
+  background-color: #264653;
+}
+
+.popup .flex-column button:hover {
+  background-color: #3A6678;
+}
+
+.popup .flex-column .delete {
+  cursor: pointer;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
 .main {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -332,34 +376,38 @@ body {
   padding: 20px 50px;
 }
 
-.popup {
-  z-index: 10;
-  width: 75vw;
-  height: 50vh;
-  background-color: #FFF;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 10px;
-  margin: auto;
-  -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-          box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-  padding: 20px 50px;
+#delete {
+  width: 500px;
+  height: 350px;
+  padding: 50px 100px;
 }
 
-.popup .flex-column {
+#delete .flex-column {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#delete p {
+  text-align: center;
+}
+
+#add {
+  max-width: 1500px;
+  height: 700px;
+  padding: 50px 100px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
 }
 
-.popup .flex-column .flex-row {
+#add .flex-column {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+#add .flex-column .flex-row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -368,24 +416,31 @@ body {
       -ms-flex-direction: row;
           flex-direction: row;
   margin-top: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.popup .flex-column button {
-  all: unset;
-  cursor: pointer;
-  padding: 10px 40px;
-  margin: 0 20px;
-  border-radius: 10px;
-  color: #f2f2f2;
-  background-color: #264653;
+#add .title {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-weight: 600;
 }
 
-.popup .flex-column button:hover {
-  background-color: #3A6678;
+#add input[type=text] {
+  margin: 30px;
+  font-size: 40px;
+  padding: 20px 50px;
 }
 
-.popup .flex-column .delete {
-  cursor: pointer;
+#add input[type=file] {
+  margin: 30px;
+  font-size: 40px;
+  padding: 20px 50px;
+}
+
+#add .button {
   -ms-flex-item-align: end;
       align-self: flex-end;
 }

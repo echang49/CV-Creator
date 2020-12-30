@@ -94,6 +94,36 @@ li {
     pointer-events: none;
 }
 
+.popup {
+    z-index: 10;
+    background-color: #FFF;
+    position: absolute;
+    top: 0; bottom: 0; left: 0; right: 0;
+    border-radius: 10px;
+    margin: auto;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+    .flex-column {
+        display: flex;
+        flex-direction: column;
+        button {
+            all: unset;
+            cursor: pointer;
+            padding: 10px 40px;
+            margin: 0 20px;
+            border-radius: 10px;
+            color: $light;
+            background-color: $dark-green;
+            &:hover {
+                background-color: $light-green;
+            }
+        }
+        .delete {
+            cursor: pointer;
+            align-self: flex-end;
+        }
+    }
+}
+
 //Block
 
 .main {
@@ -240,45 +270,50 @@ li {
     }
 }
 
-.popup {
-    z-index: 10;
-    width: 75vw;
-    height: 50vh;
-    background-color: #FFF;
-    position: absolute;
-    top: 0; bottom: 0; left: 0; right: 0;
-    border-radius: 10px;
-    margin: auto;
-    box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
-    padding: 20px 50px;
+#delete {
+    width: 500px;
+    height: 350px;
+    padding: 50px 100px; 
     .flex-column {
-        display: flex;
-        flex-direction: column;
+        align-items: center;
+    }
+    p {
+        text-align: center;
+    }
+}
+
+#add {
+    max-width: 1500px;
+    height: 700px;
+    padding: 50px 100px;
+    display: flex;
+    .flex-column {
+        flex-grow: 1;
         .flex-row {
             display: flex;
             flex-direction: row;
             margin-top: 10px;
-        }
-        button {
-            all: unset;
-            cursor: pointer;
-            padding: 10px 40px;
-            margin: 0 20px;
-            border-radius: 10px;
-            color: $light;
-            background-color: $dark-green;
-            &:hover {
-                background-color: $light-green;
-            }
-        }
-        .delete {
-            cursor: pointer;
-            align-self: flex-end;
+            align-items: center;
         }
     }
-
-    
-    
+    .title {
+        align-self: center;
+        font-weight: 600;
+        
+    }
+    input[type=text] {
+        margin: 30px;
+        font-size: 40px;
+        padding: 20px 50px;
+    }
+    input[type=file] {
+        margin: 30px;
+        font-size: 40px;
+        padding: 20px 50px;
+    }
+    .button {
+        align-self: flex-end;
+    }
 }
 
 //Exception

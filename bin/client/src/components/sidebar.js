@@ -6,7 +6,7 @@ import {ReactComponent as Delete} from "../assets/cancel.svg";
 import { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom'
 
-function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow}) {
+function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfile}) {
     const [profiles, setProfiles] = useState(['Testing CV', 'Edward\'s CV', 'Vimal\'s CV', 'Chris\' CV', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'])
 
     useEffect(() => {
@@ -31,6 +31,7 @@ function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow}) {
     function deleteItem(profile) {
         setPopupShow([false, true, false]);
         mainRef.current.classList.add('blur');
+        setDeleteProfile(profile);
         //also set the deleter user
     }
 
