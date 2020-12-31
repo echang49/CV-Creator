@@ -42,3 +42,21 @@ ipcMain.on('load-profiles', (event) => {
         event.returnValue = files;
     }); 
 })
+
+ipcMain.on('delete-profile', (event, profile) => {
+    let dirPath = path.join(__dirname, '/../profiles/'.concat(profile));
+    let files;
+    try { files = fs.readdirSync(dirPath); }
+    catch(e) { event.returnValue = false; }
+    if (files.length > 0)
+      for (let i = 0; i < files.length; i++) {
+        let filePath = dirPath + '/' + files[i];
+        if (fs.statSync(filePath).isFile())
+          fs.unlinkSync(filePath);
+        else
+          rmDir(filePath);
+    }
+    fs.rmdirSync(dirPath);
+    event.returnValue = true;
+})
+

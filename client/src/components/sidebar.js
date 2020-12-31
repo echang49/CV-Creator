@@ -2,24 +2,32 @@ import "../styles/style.css";
 import {ReactComponent as Add} from "../assets/add.svg";
 import {ReactComponent as Edit} from "../assets/edit.svg";
 import {ReactComponent as Delete} from "../assets/cancel.svg";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const electron = window.require('electron');
-const fs = electron.remote.require('fs');
 const ipcRenderer  = electron.ipcRenderer;
 
-function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfile}) {
-    const [profiles, setProfiles] = useState(['Testing CV', 'Edward\'s CV', 'Vimal\'s CV', 'Chris\' CV', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'])
+function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfile, deleted}) {
+    const [profiles, setProfiles] = useState([])
 
     useEffect(() => {
         let array = ipcRenderer.sendSync('load-profiles');
-        console.log(array);
+        setProfiles(array);
     }, []);
 
+    const isInitialDeleteMount = useRef(true);
+    useEffect(() => {
+        if (isInitialDeleteMount.current) {
+            isInitialDeleteMount.current = false;
+        } else {
+            let array = ipcRenderer.sendSync('load-profiles');
+            setProfiles(array);
+        }
+    }, [deleted]);
+    
     function addItem() {
         setPopupShow([true, false, false]);
         mainRef.current.classList.add('blur');
-        //ReactDOM.findDOMNode('body').classList.add('blur');
     }
 
     function editItem(profile) {
@@ -30,7 +38,6 @@ function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfi
         setPopupShow([false, true, false]);
         mainRef.current.classList.add('blur');
         setDeleteProfile(profile);
-        //also set the deleter user
     }
 
     function displayProfile(profile) {

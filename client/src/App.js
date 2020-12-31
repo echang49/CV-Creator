@@ -16,6 +16,7 @@ function App() {
 
   const [profile, setProfile] = useState();
   const [deleteProfile, setDeleteProfile] = useState();
+  const [deleted, setDeleted] = useState();
 
   const mainRef = createRef();
 
@@ -26,7 +27,7 @@ function App() {
   return (
     <div>
       <div className="main" ref={mainRef}>
-        <Sidebar setPopupShow={setPopupShow} mainRef={mainRef} setProfile={setProfile} setBodyShow={setBodyShow} setDeleteProfile={setDeleteProfile} />
+        <Sidebar setPopupShow={setPopupShow} mainRef={mainRef} setProfile={setProfile} setBodyShow={setBodyShow} setDeleteProfile={setDeleteProfile} deleted={deleted} />
         <div className="body">
           {
             bodyShow[0] ?
@@ -57,7 +58,7 @@ function App() {
       }
       {
         popupShow[1] ?
-          <Delete setPopupShow={setPopupShow} mainRef={mainRef} deleteProfile={deleteProfile} />
+          <Delete setPopupShow={setPopupShow} mainRef={mainRef} deleteProfile={deleteProfile} setDeleted={setDeleted} />
         :
           <div />
       }

@@ -1,14 +1,25 @@
 import "../styles/style.css";
 import {ReactComponent as Close} from "../assets/close.svg";
 
-function Delete({ setPopupShow, mainRef, deleteProfile }) {
+const electron = window.require('electron');
+const ipcRenderer  = electron.ipcRenderer;
+
+function Delete({ setPopupShow, mainRef, deleteProfile, setDeleted }) {
     function close() {
         setPopupShow([false, false, false]);
         mainRef.current.classList.remove('blur');
     }
 
     function confirmDelete(profile) {
-
+        let bool = ipcRenderer.sendSync('delete-profile', profile);
+        if(bool) {
+            setDeleted(deleteProfile);
+            setPopupShow([false, false, false]);
+            mainRef.current.classList.remove('blur');
+        }
+        else {
+            alert('Sorry! We ran into an error and was unable to delete the profile. If you would like to do it manually, please go into where you installed the program -> Client -> Profiles, and then delete your selected profile');
+        }
     }
 
     return(
@@ -24,7 +35,6 @@ function Delete({ setPopupShow, mainRef, deleteProfile }) {
                 </div>
             </div>
         </div>
-
     );
 }
 
