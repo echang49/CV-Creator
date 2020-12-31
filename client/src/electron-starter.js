@@ -1,12 +1,13 @@
 const electron = require('electron');
+const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
+const url = require('url');
+
 const app = electron.app;
 const ipcMain = electron.ipcMain;
 const session = electron.session;
 const BrowserWindow = electron.BrowserWindow;
-const fs = require('fs');
-
-const path = require('path');
-const url = require('url');
 
 let mainWindow;
 
@@ -61,39 +62,48 @@ ipcMain.on('delete-profile', (event, profile) => {
     event.returnValue = true;
 })
 
-let uaArray = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
-];
+ipcMain.on('load-url', (event, url) => {
+    axios.get(url).then((res) => {
+        event.returnValue = res.data;
+    });
+})
 
-//randomize on start so user agent queue is always different on launch
-uaArray = shuffle(uaArray);
 
-session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
-  details.requestHeaders['User-Agent'] = uaArray[0];
-  callback({ cancel: false, requestHeaders: details.requestHeaders });
-});
 
-//Fisher-Yates Shuffle Algorithm to randomize an array
-function shuffle(array) {
-    var currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
+
+
+// let uaArray = [
+//     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+//     "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+//     "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+//     "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+//     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+// ];
+
+// //randomize on start so user agent queue is always different on launch
+// uaArray = shuffle(uaArray);
+
+// session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
+//   details.requestHeaders['User-Agent'] = uaArray[0];
+//   callback({ cancel: false, requestHeaders: details.requestHeaders });
+// });
+
+// //Fisher-Yates Shuffle Algorithm to randomize an array
+// function shuffle(array) {
+//     var currentIndex = array.length,
+//       temporaryValue,
+//       randomIndex;
   
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
+//     // While there remain elements to shuffle...
+//     while (0 !== currentIndex) {
+//       // Pick a remaining element...
+//       randomIndex = Math.floor(Math.random() * currentIndex);
+//       currentIndex -= 1;
   
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-  
-    return array;
-}
+//       // And swap it with the current element.
+//       temporaryValue = array[currentIndex];
+//       array[currentIndex] = array[randomIndex];
+//       array[randomIndex] = temporaryValue;
+//     }
+//     return array;
+// }

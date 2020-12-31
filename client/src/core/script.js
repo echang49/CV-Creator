@@ -6,7 +6,12 @@ import createSentence from './linguigstic.js';
 async function main(url, profile) {
     let text = await scrape(url)
     //console.log(text);
-    secondary(text, profile);
+    if(text !== "NOT VALID URL"){
+        secondary(text, profile);
+    }
+    else {
+        return "NOT VALID URL";
+    }
 }
 
 async function secondary(text, profile) {
@@ -24,19 +29,19 @@ async function secondary(text, profile) {
         //console.log(sentences);
         let cv = fs.readFileSync('../../profiles/'.concat(profile).concat('/text.txt'), {encoding: 'utf8', flag: 'r'});
 
-        if(sentences[0] != 'I excel in . '){
+        if(sentences[0] !== 'I excel in . '){
             cv = cv.replace('[VERB]', sentences[0]);
         }
         else {
             cv = cv.replace('[VERB]', '');
         }
-        if(sentences[1] != 'I am good at . '){
+        if(sentences[1] !== 'I am good at . '){
             cv = cv.replace('[NOUN]', sentences[1]);
         }
         else {
             cv = cv.replace('[NOUN]', '');
         }
-        if(sentences[2] != 'Lastly, I am also  . '){
+        if(sentences[2] !== 'Lastly, I am also  . '){
             cv = cv.replace('[ADJECTIVE]', sentences[2]);
         }
         else {

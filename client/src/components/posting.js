@@ -8,11 +8,11 @@ function Posting({ profile }) {
     const urlRef = createRef();
     const textRef = createRef();
 
-    function submitURL(url) {
-        console.log(script);
-        let cv = script.main(url, profile, () => {
-            alert(cv);
-        });
+    async function submitURL(url) {
+        let cv = await script.main(url, profile);
+        if(cv === "NOT VALID URL") {
+            alert("Unfortunately, the URL posted is currently not supported. We currently only support indeed, the canada job bank (not CSJ), workday, and linkedin.");
+        }
     }
 
     function submitText(text) {

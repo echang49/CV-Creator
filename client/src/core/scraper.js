@@ -2,6 +2,9 @@
 import axios from "axios"; //https://www.npmjs.com/package/axios
 import cheerio from "cheerio"; //https://www.npmjs.com/package/cheerio
 
+const electron = window.require('electron');
+const ipcRenderer  = electron.ipcRenderer;
+
 const log = console.log
 
 export default async function scrape(urlInput) {
@@ -32,10 +35,10 @@ export default async function scrape(urlInput) {
 //SCRAPING & API FUNCTIONS
 async function fetchIndeed(url) {
   try {
-    const page = (await axios.get(url.href)).data;
+    const page = ipcRenderer.sendSync('load-url', url.href);
     const $ = cheerio.load(page);
     //Checks which case it is
-    if (url.pathname == "/viewjob") {
+    if (url.pathname === "/viewjob") {
       $( "*" ).each(function( index ) {
         $( this ).append(' ');
       });
@@ -54,14 +57,13 @@ async function fetchIndeed(url) {
 async function fetchCanada(url) {
   try {
     if (url.pathname.includes("jobposting")) { 
-      const page = (await axios.get(url.href)).data;
+      const page = ipcRenderer.sendSync('load-url', url.href);
       const $ = cheerio.load(page);
       $( "*" ).each(function( index ) {
         $( this ).append(' ');
       });
       let str = $('.job-posting-detail-requirements').text()
       str = str.replace(/\s\s+/g, ' ');
-      str = str.split('Specific Skills')[1];
       return str;
     }
     else { 
@@ -76,7 +78,7 @@ async function fetchCanada(url) {
 async function fetchWorkday(url) {
   try {
     if (url.pathname.includes("job")) { 
-      const page = (await axios.get(url.href)).data;
+      const page = ipcRenderer.sendSync('load-url', url.href);
       //let title = page.openGraphAttributes.title
       let content = page.openGraphAttributes.description;
       return content;
@@ -92,11 +94,10 @@ async function fetchWorkday(url) {
 
 async function fetchLinkedIn(url) {
   try {
-    const page = (await axios.get(url.href)).data;
+    const page = ipcRenderer.sendSync('load-url', url.href);
     //console.log(page);
     const $ = cheerio.load(page);
     //console.log($);
-    log(url.pathname);
     if (url.pathname.includes("/jobs/view/")){
         $( "*" ).each(function( index ) {
           $( this ).append(' ');
