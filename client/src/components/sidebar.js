@@ -69,7 +69,7 @@ function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfi
                     </div>
                 </div>
                 
-                <p className="sidebar-footer">Made by <a className="bold" href="https://echang.dev/" target="_blank">Edward Chang</a>, <a className="bold" href="https://vmaken.dev/" target="_blank">Vimal Makenthirarasa</a>, and <a className="bold" href="https://github.com/chriswan12" target="_blank">Chris Wan</a>.</p>
+                <p className="sidebar-footer">Made by <a className="bold" href="https://echang.dev/" target="_blank" rel="noreferrer">Edward Chang</a>, <a className="bold" href="https://vmaken.dev/" target="_blank" rel="noreferrer">Vimal Makenthirarasa</a>, and <a className="bold" href="https://github.com/chriswan12" target="_blank" rel="noreferrer">Chris Wan</a>.</p>
             </div>
         </div>
     );

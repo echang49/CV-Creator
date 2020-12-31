@@ -1,11 +1,8 @@
 //Importing dependencies. Read up on each dependency to understand functionality.
-import axios from "axios"; //https://www.npmjs.com/package/axios
 import cheerio from "cheerio"; //https://www.npmjs.com/package/cheerio
 
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
-
-const log = console.log
 
 export default async function scrape(urlInput) {
   const url = new URL(urlInput);

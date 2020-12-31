@@ -3,6 +3,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const { PythonShell } =  require('python-shell');
 
 const app = electron.app;
 const ipcMain = electron.ipcMain;
@@ -68,42 +69,23 @@ ipcMain.on('load-url', (event, url) => {
     });
 })
 
-
-
-
-
-// let uaArray = [
-//     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-//     "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-//     "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-//     "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-//     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
-// ];
-
-// //randomize on start so user agent queue is always different on launch
-// uaArray = shuffle(uaArray);
-
-// session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
-//   details.requestHeaders['User-Agent'] = uaArray[0];
-//   callback({ cancel: false, requestHeaders: details.requestHeaders });
-// });
-
-// //Fisher-Yates Shuffle Algorithm to randomize an array
-// function shuffle(array) {
-//     var currentIndex = array.length,
-//       temporaryValue,
-//       randomIndex;
-  
-//     // While there remain elements to shuffle...
-//     while (0 !== currentIndex) {
-//       // Pick a remaining element...
-//       randomIndex = Math.floor(Math.random() * currentIndex);
-//       currentIndex -= 1;
-  
-//       // And swap it with the current element.
-//       temporaryValue = array[currentIndex];
-//       array[currentIndex] = array[randomIndex];
-//       array[randomIndex] = temporaryValue;
-//     }
-//     return array;
-// }
+ipcMain.on('load-python', (event, text) => {
+    let options = {
+        mode: 'text',
+        scriptPath : path.join(__dirname, '/core/'),
+        pythonOptions: ['-u'], // get print results in real-time
+        args: [text]
+    };
+    PythonShell.run('nlp.py', options, (err, results) => {
+        if (err)  throw err;
+        let newData = results[0];
+        newData = newData.replace(/],/gi, "]~").replace(']]',']').replace('[[','[').replace(/, /gi, ":").trim(); 
+        newData = newData.split("~ ");
+        for(let i in newData) {
+            newData[i] = newData[i].replace('[','').replace(']','').replace(/\'/gi,'');
+            let temp = newData[i].split(":");
+            newData[i] = [temp[0], temp[1]];
+        }
+        event.returnValue = newData;
+    });
+})
