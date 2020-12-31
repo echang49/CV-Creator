@@ -1,19 +1,8 @@
 //Importing dependencies. Read up on each dependency to understand functionality.
-
-const log = console.log
 import axios from "axios"; //https://www.npmjs.com/package/axios
 import cheerio from "cheerio"; //https://www.npmjs.com/package/cheerio
 
-let uaArray = [
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-  "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-  "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-  "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
-  "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
-];
-//randomize on start so user agent queue is always different on launch
-uaArray = shuffle(uaArray);
-let uaIndex = 0; //current position in uaArray
+const log = console.log
 
 export default async function scrape(urlInput) {
   const url = new URL(urlInput);
@@ -42,10 +31,8 @@ export default async function scrape(urlInput) {
 
 //SCRAPING & API FUNCTIONS
 async function fetchIndeed(url) {
-  //Choosing a random user agent so memory express thinks the scraper is a browser
-  let header = randomUA();
   try {
-    const page = (await axios.get(url.href, { headers: header })).data;
+    const page = (await axios.get(url.href)).data;
     const $ = cheerio.load(page);
     //Checks which case it is
     if (url.pathname == "/viewjob") {
@@ -65,11 +52,9 @@ async function fetchIndeed(url) {
 }
 
 async function fetchCanada(url) {
-  //Choosing a random user agent so memory express thinks the scraper is a browser
-  let header = randomUA();
   try {
     if (url.pathname.includes("jobposting")) { 
-      const page = (await axios.get(url.href, { headers: header })).data;
+      const page = (await axios.get(url.href)).data;
       const $ = cheerio.load(page);
       $( "*" ).each(function( index ) {
         $( this ).append(' ');
@@ -89,12 +74,9 @@ async function fetchCanada(url) {
 }
 
 async function fetchWorkday(url) {
-  //Choosing a random user agent so memory express thinks the scraper is a browser
-  let header = randomUA();
-
   try {
     if (url.pathname.includes("job")) { 
-      const page = (await axios.get(url.href, { headers: header })).data;
+      const page = (await axios.get(url.href)).data;
       //let title = page.openGraphAttributes.title
       let content = page.openGraphAttributes.description;
       return content;
@@ -109,10 +91,8 @@ async function fetchWorkday(url) {
 }
 
 async function fetchLinkedIn(url) {
-  //Choosing a random user agent so memory express thinks the scraper is a browser
-  let header = randomUA();
   try {
-    const page = (await axios.get(url.href, { headers: header })).data;
+    const page = (await axios.get(url.href)).data;
     //console.log(page);
     const $ = cheerio.load(page);
     //console.log($);
@@ -133,47 +113,8 @@ async function fetchLinkedIn(url) {
   }
 }
 
-//UTILITY FUNCTIONS
-function randomUA() {
-  //returns the next user agent in the queue
-  let returnItem = {
-    "User-Agent": uaArray[uaIndex],
-    "Accept-CH": 'width'
-  };
-  if (uaIndex != uaArray.length - 1) {
-    uaIndex++;
-  }
-  //queue is done. reset the queue and reshuffle
-  else {
-    uaIndex = 0;
-    uaArray = shuffle(uaArray);
-  }
-
-  return returnItem;
-}
-
 function notValid() {
     //TODO: Send client message that url is not a valid job posting
     return("NOT VALID URL");
 }
 
-//Fisher-Yates Shuffle Algorithm to randomize an array
-function shuffle(array) {
-  var currentIndex = array.length,
-    temporaryValue,
-    randomIndex;
-
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}

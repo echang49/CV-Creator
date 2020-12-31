@@ -1,5 +1,5 @@
 import "../styles/style.css";
-
+import script from "../core/script.js";
 import { useState, createRef } from 'react';
 
 function Posting({ profile }) {
@@ -9,11 +9,15 @@ function Posting({ profile }) {
     const textRef = createRef();
 
     function submitURL(url) {
-        alert(url);
+        console.log(script);
+        let cv = script.main(url, profile, () => {
+            alert(cv);
+        });
     }
 
     function submitText(text) {
-        alert(text);
+        //let cv = script.secondary(text, profile);
+        //alert(cv);
     }
 
     return (
