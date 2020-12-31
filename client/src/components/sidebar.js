@@ -2,20 +2,18 @@ import "../styles/style.css";
 import {ReactComponent as Add} from "../assets/add.svg";
 import {ReactComponent as Edit} from "../assets/edit.svg";
 import {ReactComponent as Delete} from "../assets/cancel.svg";
-
 import { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom'
+
+const electron = window.require('electron');
+const fs = electron.remote.require('fs');
+const ipcRenderer  = electron.ipcRenderer;
 
 function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfile}) {
     const [profiles, setProfiles] = useState(['Testing CV', 'Edward\'s CV', 'Vimal\'s CV', 'Chris\' CV', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'])
 
     useEffect(() => {
-    //     //Get the names of the folder under /profiles      
-    //     fs.readdirSync('../../../../profiles', (err, files) => {
-    //       files.forEach(file => {
-    //           console.log("your mum " + file);
-    //       });
-    //   });
+        let array = ipcRenderer.sendSync('load-profiles');
+        console.log(array);
     }, []);
 
     function addItem() {
