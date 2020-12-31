@@ -8,8 +8,11 @@ const ipcRenderer = electron.ipcRenderer;
 function Add({ setPopupShow, mainRef, setEdited }) {
     const profileRef = useRef();
     const fileRef = useRef();
+    const textRef = useRef();
 
     const [bool, setBool] = useState(true);
+    const[text, setText] = useState();
+    const[profileName, setProfileName] = useState();
 
     function close() {
         setPopupShow([false, false, false]);
@@ -19,20 +22,21 @@ function Add({ setPopupShow, mainRef, setEdited }) {
     async function next() {
         let profile = profileRef.current.value;
         let file = fileRef.current.files[0].path;
+        setProfileName(profile);
         let cv = ipcRenderer.sendSync('add-profile', profile, file);
-        if(cv === "PROFILE EXISTS!") {
+        if(cv[0] === "PROFILE EXISTS!") {
             alert("A profile already exists under this name. Please create a new profile with a unique name.");
         }
-        else if (cv === "NOT A VALID FILE!") {
+        else if (cv[0] === "NOT A VALID FILE!") {
             alert("Unfortunately, this file type is not supported. We currently only support .docx, .pdf, and .txt files.");
         }
-        else if (cv === "UNEXPECTED ERROR") {
+        else if (cv[0] === "UNEXPECTED ERROR") {
             alert("Unfortunately, you happened to reach an unexpected error and we're not sure what to do.");
         }
-        else if (cv === "success") {
+        else if (cv[0] === "success") {
             setEdited(profile);
-            alert('going to next step');
             setBool(false);
+            setText(cv[1]);
         }
         else {
             alert("Unfortunately, you happened to reach an unexpected error and we're not sure what to do.");
@@ -40,7 +44,15 @@ function Add({ setPopupShow, mainRef, setEdited }) {
     }
 
     async function create() {
-
+        let input = textRef.current.value;
+        let cv = ipcRenderer.sendSync('edit-profile', profileName, input);
+        if(cv === "success") {
+            alert("Profile successfully created!");
+            close();
+        }
+        else {
+            alert("Unfortunately, you happened to reach an unexpected error and we're not sure what to do.");
+        }
     }
 
     return (
@@ -70,7 +82,8 @@ function Add({ setPopupShow, mainRef, setEdited }) {
                         <div className="delete">
                             <Close onClick={() => close()} />
                         </div>
-                        <p className="title">Format this</p>
+                        <p className="subtitle">The following is what the cover letter looks like in our system. Make sure to re-format it properly so that employers see a well formatted document. Add [NOUN], [VERB], and [ADJECTIVE] to where you think it would fit best. An example would be "I like to work. [NOUN][VERB][ADJECTIVE]"</p>
+                        <textarea ref={textRef} >{text}</textarea>
                         <div className="button">
                             <button onClick={() => create()} >Create</button>
                         </div>

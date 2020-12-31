@@ -164,7 +164,7 @@ ipcMain.on('add-profile', async (event, profile, file) => {
             if(err) {
                 return console.log(err);
             }
-            event.returnValue = "success";
+            event.returnValue = ["success", text];
         });
     }
 
@@ -186,13 +186,23 @@ ipcMain.on('add-profile', async (event, profile, file) => {
                     readTXT(file, destinationDir)
                     break;
                 default:
-                    event.returnValue = "UNEXPECTED ERROR";
+                    event.returnValue = ["UNEXPECTED ERROR"];
             }
         }
         else {
-            event.returnValue = "NOT A VALID FILE!";
+            event.returnValue = ["NOT A VALID FILE!"];
         }
     } else {
-        event.returnValue = "PROFILE EXISTS!";
+        event.returnValue = ["PROFILE EXISTS!"];
     }
+});
+
+ipcMain.on('edit-profile', async (event, profile, text) => {
+    let destinationDir = path.join(__dirname, `../profiles/${profile}`);
+    fs.writeFile(destinationDir.concat('/text.txt'), text, function(err) {
+        if(err) {
+            event.returnValue = "failure";
+        }
+        event.returnValue = "success";
+    });
 });
