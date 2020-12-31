@@ -13,6 +13,9 @@ function Posting({ profile }) {
         if(cv === "NOT VALID URL") {
             alert("Unfortunately, the URL posted is currently not supported. We currently only support indeed, the canada job bank (not CSJ), workday, and linkedin.");
         }
+        else {
+            alert(cv);
+        }
     }
 
     function submitText(text) {

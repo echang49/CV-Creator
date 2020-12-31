@@ -1,7 +1,7 @@
 export default function createSentence(array){
         let verb = "I excel in ";
         let noun = "I am good at ";
-        let adj = "Lastly, I am also ";
+        let adj = "I am also ";
         for(let i of array){
             //if proper noun (propn), skip
             switch(i[1]){
@@ -22,7 +22,7 @@ export default function createSentence(array){
                     }
                     break;
                 case 'ADJ':
-                    if (adj === 'Lastly, I am also '){
+                    if (adj === 'I am also '){
                         adj = adj.concat(i[0])
                     }
                     else {

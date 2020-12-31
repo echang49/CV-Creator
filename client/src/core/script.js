@@ -9,7 +9,7 @@ async function main(url, profile) {
     let text = await scrape(url)
     //console.log(text);
     if(text !== "NOT VALID URL"){
-        secondary(text, profile);
+        return secondary(text, profile);
     }
     else {
         return "NOT VALID URL";
@@ -18,28 +18,9 @@ async function main(url, profile) {
 
 async function secondary(text, profile) {
     const data = ipcRenderer.sendSync('load-python', text);
-    let sentences = createSentence(newData);
-    console.log(sentences);
-    // let cv = fs.readFileSync('../../profiles/'.concat(profile).concat('/text.txt'), {encoding: 'utf8', flag: 'r'});
-
-    // if(sentences[0] !== 'I excel in . '){
-    //     cv = cv.replace('[VERB]', sentences[0]);
-    // }
-    // else {
-    //     cv = cv.replace('[VERB]', '');
-    // }
-    // if(sentences[1] !== 'I am good at . '){
-    //     cv = cv.replace('[NOUN]', sentences[1]);
-    // }
-    // else {
-    //     cv = cv.replace('[NOUN]', '');
-    // }
-    // if(sentences[2] !== 'Lastly, I am also  . '){
-    //     cv = cv.replace('[ADJECTIVE]', sentences[2]);
-    // }
-    // else {
-    //     cv = cv.replace('[ADJECTIVE]', '');
-    // }
+    let sentences = createSentence(data);
+    const cv = ipcRenderer.sendSync('create-cv', sentences, profile);
+    return cv;
 }
 
 export default {main, secondary}

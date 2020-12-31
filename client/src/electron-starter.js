@@ -89,3 +89,27 @@ ipcMain.on('load-python', (event, text) => {
         event.returnValue = newData;
     });
 })
+
+ipcMain.on('create-cv', (event, sentences, profile) => {
+    //let cv = fs.readFileSync('../../profiles/'.concat(profile).concat('/text.txt'), {encoding: 'utf8', flag: 'r'});
+    let cv = fs.readFileSync(path.join(__dirname, '/../profiles/').concat(profile).concat('/text.txt'), {encoding: 'utf8', flag: 'r'});
+    if(sentences[0] !== 'I excel in . '){
+        cv = cv.replace('[VERB]', sentences[0]);
+    }
+    else {
+        cv = cv.replace('[VERB]', '');
+    }
+    if(sentences[1] !== 'I am good at . '){
+        cv = cv.replace('[NOUN]', sentences[1]);
+    }
+    else {
+        cv = cv.replace('[NOUN]', '');
+    }
+    if(sentences[2] !== 'Lastly, I am also  . '){
+        cv = cv.replace('[ADJECTIVE]', sentences[2]);
+    }
+    else {
+        cv = cv.replace('[ADJECTIVE]', '');
+    }
+    event.returnValue = cv;
+});

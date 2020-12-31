@@ -14,4 +14,6 @@ STAGE 2
 
 STAGE 3
     Bundle into .exe
-    Turn into desktop app through electron
+    
+TODO
+    Make loading screen for posting.js when it runs (takes a while)
