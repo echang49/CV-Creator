@@ -4,7 +4,7 @@ import {ReactComponent as Close} from "../assets/close.svg";
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
 
-function Delete({ setPopupShow, mainRef, deleteProfile, setDeleted }) {
+function Delete({ setPopupShow, mainRef, deleteProfile, setEdited }) {
     function close() {
         setPopupShow([false, false, false]);
         mainRef.current.classList.remove('blur');
@@ -13,7 +13,7 @@ function Delete({ setPopupShow, mainRef, deleteProfile, setDeleted }) {
     function confirmDelete(profile) {
         let bool = ipcRenderer.sendSync('delete-profile', profile);
         if(bool) {
-            setDeleted(deleteProfile);
+            setEdited(deleteProfile);
             setPopupShow([false, false, false]);
             mainRef.current.classList.remove('blur');
         }

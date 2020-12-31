@@ -4,6 +4,9 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 const { PythonShell } =  require('python-shell');
+var Docxtemplater = require('docxtemplater');
+const PDFExtract = require('pdf.js-extract').PDFExtract;
+const PizZip = require('pizzip');
 
 const app = electron.app;
 const ipcMain = electron.ipcMain;
@@ -112,4 +115,84 @@ ipcMain.on('create-cv', (event, sentences, profile) => {
         cv = cv.replace('[ADJECTIVE]', '');
     }
     event.returnValue = cv;
+});
+
+ipcMain.on('add-profile', async (event, profile, file) => {
+    function readPDF(pathing, dirPath) {
+        const pdfExtract = new PDFExtract();
+        const options = {}; /* see below */
+        pdfExtract.extract(pathing, options, (err, data) => {
+            if (err) return console.log(err);
+            //console.log(data.pages[0].content);
+            let text = '';
+            for(let page in data.pages) {
+                let pageText = '';
+                for(let content in data.pages[page].content) {
+                    pageText = pageText.concat(data.pages[page].content[content].str);
+                }
+                text = text.concat(pageText);
+            }
+            text = text.replace(/ {1,}/g," ");
+            return createProfile(text, dirPath);
+        });
+    }
+
+    function readDOCX(pathing, dirPath) {
+        let content = fs.readFileSync(pathing, 'binary');
+        const zip = new PizZip(content);
+        const doc = new Docxtemplater(zip);
+        let text = doc.getFullText();
+        return createProfile(text, dirPath);
+    }
+
+    function readTXT(pathing, dirPath) {
+        fs.readFile(pathing, 'utf-8', (err, data) => { 
+            if (err) throw err; 
+            //console.log(data);
+            return createProfile(data, dirPath);
+        })
+    }
+
+    function createProfile(text, dirPath) {
+        console.log(text);      
+        fs.mkdir(dirPath, (err) => { 
+             if (err) { 
+                 console.error(err); 
+            } 
+        });
+        fs.writeFile(dirPath.concat('/text.txt'), text, function(err) {
+            if(err) {
+                return console.log(err);
+            }
+            event.returnValue = "success";
+        });
+    }
+
+    var destinationDir = path.join(__dirname, `../profiles/${profile}`) // file path for new profile folder
+    // check if folder with same profile name already exists. If it does not exist, create folder in ./profiles 
+    if (!fs.existsSync(destinationDir)) {
+        //get file extension
+        let fileArray = file.split('.');
+        let fileExtension = fileArray[fileArray.length - 1].toLowerCase();
+        if(fileExtension === "pdf" || fileExtension === "docx" || fileExtension === "txt") {
+            switch (fileExtension) {
+                case "pdf":
+                    readPDF(file, destinationDir);
+                    break;
+                case "docx":
+                    readDOCX(file, destinationDir);
+                    break;
+                case "txt":
+                    readTXT(file, destinationDir)
+                    break;
+                default:
+                    event.returnValue = "UNEXPECTED ERROR";
+            }
+        }
+        else {
+            event.returnValue = "NOT A VALID FILE!";
+        }
+    } else {
+        event.returnValue = "PROFILE EXISTS!";
+    }
 });

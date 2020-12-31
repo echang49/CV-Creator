@@ -7,7 +7,7 @@ import { useState, useEffect, useRef } from 'react';
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
 
-function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfile, deleted}) {
+function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfile, edited}) {
     const [profiles, setProfiles] = useState([])
 
     useEffect(() => {
@@ -15,15 +15,15 @@ function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfi
         setProfiles(array);
     }, []);
 
-    const isInitialDeleteMount = useRef(true);
+    const isInitialEditMount = useRef(true);
     useEffect(() => {
-        if (isInitialDeleteMount.current) {
-            isInitialDeleteMount.current = false;
+        if (isInitialEditMount.current) {
+            isInitialEditMount.current = false;
         } else {
             let array = ipcRenderer.sendSync('load-profiles');
             setProfiles(array);
         }
-    }, [deleted]);
+    }, [edited]);
     
     function addItem() {
         setPopupShow([true, false, false]);
