@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\Edward\Documents\GitHub\CV-Creator\bin\core\env
+set VIRTUAL_ENV=C:\Users\Edward\Documents\GitHub\CV-Creator\client\src\core\env
 
 if not defined PROMPT set PROMPT=$P$G
 
