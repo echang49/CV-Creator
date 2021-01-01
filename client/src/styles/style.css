@@ -70,7 +70,7 @@ body {
 }
 
 .mr-20 {
-  margin-right: 20px;
+  margin-right: 20px !important;
 }
 
 .icon:hover {
@@ -514,5 +514,76 @@ body {
 
 .finished button:hover {
   background-color: #3A6678;
+}
+
+.edit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.edit textarea {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  overflow-y: scroll;
+  height: 65vh;
+  width: 50vw;
+  margin: 20px 0;
+  font-family: 'PT Serif', serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.edit .title {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  font-weight: 600;
+  letter-spacing: 5px;
+  font-size: 60px;
+  margin: 25px 0;
+}
+
+.edit button {
+  all: unset;
+  cursor: pointer;
+  padding: 10px 40px;
+  margin: 0 0;
+  border-radius: 10px;
+  color: #f2f2f2;
+  background-color: #264653;
+}
+
+.edit button:hover {
+  background-color: #3A6678;
+}
+
+.edit .flex-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.edit .flex-row p {
+  margin: 0 20px 0 0;
+}
+
+.edit .flex-row input[type=text] {
+  padding: 10px 20px;
 }
 /*# sourceMappingURL=style.css.map */

@@ -7,7 +7,7 @@ import { useState, useEffect, useRef } from 'react';
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
 
-function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfile, edited}) {
+function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfile, edited, setEditedProfile}) {
     const [profiles, setProfiles] = useState([])
 
     useEffect(() => {
@@ -31,7 +31,8 @@ function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfi
     }
 
     function editItem(profile) {
-        alert('time to edit ' + profile);
+        setBodyShow([false, false, true, false]);
+        setEditedProfile(profile);
     }
 
     function deleteItem(profile) {
@@ -41,8 +42,8 @@ function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfi
     }
 
     function displayProfile(profile) {
-        setBodyShow([false, true, false, false])
-        setProfile(profile)
+        setBodyShow([false, true, false, false]);
+        setProfile(profile);
     }
 
     return (

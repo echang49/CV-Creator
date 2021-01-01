@@ -4,6 +4,7 @@ import Posting from "./components/posting.js";
 import Add from "./components/add.js";
 import Delete from "./components/delete.js";
 import Finished from "./components/finished.js";
+import Edit from './components/edit.js';
 import {ReactComponent as Help} from "./assets/help.svg";
 
 import { useState, createRef } from 'react';
@@ -19,6 +20,7 @@ function App() {
   const [deleteProfile, setDeleteProfile] = useState();
   const [posting, setPosting] = useState();
   const [edited, setEdited] = useState();
+  const [editedProfile, setEditedProfile] = useState();
 
   const mainRef = createRef();
 
@@ -29,7 +31,7 @@ function App() {
   return (
     <div>
       <div className="main" ref={mainRef}>
-        <Sidebar setPopupShow={setPopupShow} mainRef={mainRef} setProfile={setProfile} setBodyShow={setBodyShow} setDeleteProfile={setDeleteProfile} edited={edited} />
+        <Sidebar setPopupShow={setPopupShow} mainRef={mainRef} setProfile={setProfile} setBodyShow={setBodyShow} setDeleteProfile={setDeleteProfile} edited={edited} setEditedProfile={setEditedProfile} />
         <div className="body">
           {
             bodyShow[0] ?
@@ -43,6 +45,14 @@ function App() {
             bodyShow[1] ?
               <div className="body-posting">
                 <Posting profile={profile} setPosting={setPosting} setBodyShow={setBodyShow} />
+              </div>
+            :
+              <div />
+          }
+          {
+            bodyShow[2] ?
+              <div className="body-finished">
+                <Edit setBodyShow={setBodyShow} editedProfile={editedProfile} setEdited={setEdited} />
               </div>
             :
               <div />

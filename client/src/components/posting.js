@@ -19,8 +19,8 @@ function Posting({ profile, setPosting, setBodyShow }) {
         }
     }
 
-    function submitText(text) {
-        let cv = script.secondary(text, profile);
+    async function submitText(text) {
+        let cv = await script.secondary(text, profile);
         setBodyShow([false, false, false, true]);
         setPosting(cv);
     }
