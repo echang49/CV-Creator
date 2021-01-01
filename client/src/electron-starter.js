@@ -75,7 +75,6 @@ ipcMain.on('load-url', (event, url) => {
 ipcMain.on('load-python', (event, text) => {
     let options = {
         mode: 'text',
-        pythonPath: path.join(__dirname, '/core/env/Scripts/python'),
         scriptPath : path.join(__dirname, '/core/'),
         pythonOptions: ['-u'], // get print results in real-time
         args: [text]

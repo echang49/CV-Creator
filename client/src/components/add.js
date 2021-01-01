@@ -82,7 +82,7 @@ function Add({ setPopupShow, mainRef, setEdited }) {
                         <div className="delete">
                             <Close onClick={() => close()} />
                         </div>
-                        <p className="subtitle">The following is what the cover letter looks like in our system.<br />Make sure to re-format it properly so that employers see a well formatted document. Add [NOUN], [VERB], and [ADJECTIVE] to where you think it would fit best. An example would be "I like to work. [NOUN][VERB][ADJECTIVE]"</p>
+                        <p className="subtitle">The following is what the cover letter looks like in our system. Make sure to re-format it properly so that employers see a well formatted document. Add [NOUN], [VERB], and [ADJECTIVE] to where you think it would fit best. An example would be "I like to work. [NOUN][VERB][ADJECTIVE]"</p>
                         <textarea ref={textRef} >{text}</textarea>
                         <div className="button">
                             <button onClick={() => create()} >Create</button>
