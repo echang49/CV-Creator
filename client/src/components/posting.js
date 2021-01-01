@@ -2,7 +2,7 @@ import "../styles/style.css";
 import script from "../core/script.js";
 import { useState, createRef } from 'react';
 
-function Posting({ profile }) {
+function Posting({ profile, setPosting, setBodyShow }) {
     const [showURL, setShowURL] = useState(true);
 
     const urlRef = createRef();
@@ -14,13 +14,15 @@ function Posting({ profile }) {
             alert("Unfortunately, the URL posted is currently not supported. We currently only support indeed, the canada job bank (not CSJ), workday, and linkedin.");
         }
         else {
-            alert(cv);
+            setBodyShow([false, false, false, true]);
+            setPosting(cv);
         }
     }
 
     function submitText(text) {
-        //let cv = script.secondary(text, profile);
-        //alert(cv);
+        let cv = script.secondary(text, profile);
+        setBodyShow([false, false, false, true]);
+        setPosting(cv);
     }
 
     return (

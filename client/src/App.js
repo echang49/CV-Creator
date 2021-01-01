@@ -3,6 +3,7 @@ import Default from "./components/default.js";
 import Posting from "./components/posting.js";
 import Add from "./components/add.js";
 import Delete from "./components/delete.js";
+import Finished from "./components/finished.js";
 import {ReactComponent as Help} from "./assets/help.svg";
 
 import { useState, createRef } from 'react';
@@ -16,7 +17,7 @@ function App() {
 
   const [profile, setProfile] = useState();
   const [deleteProfile, setDeleteProfile] = useState();
-
+  const [posting, setPosting] = useState();
   const [edited, setEdited] = useState();
 
   const mainRef = createRef();
@@ -41,7 +42,15 @@ function App() {
           {
             bodyShow[1] ?
               <div className="body-posting">
-                <Posting profile={profile} />
+                <Posting profile={profile} setPosting={setPosting} setBodyShow={setBodyShow} />
+              </div>
+            :
+              <div />
+          }
+          {
+            bodyShow[3] ?
+              <div className="body-finished">
+                <Finished posting={posting} setBodyShow={setBodyShow} />
               </div>
             :
               <div />

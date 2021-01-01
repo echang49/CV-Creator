@@ -154,7 +154,7 @@ ipcMain.on('add-profile', async (event, profile, file) => {
     }
 
     function createProfile(text, dirPath) {
-        console.log(text);      
+        //console.log(text);      
         fs.mkdir(dirPath, (err) => { 
              if (err) { 
                  console.error(err); 
