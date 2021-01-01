@@ -1,8 +1,6 @@
 TODO
-    Make UI/UX
+    Edit UI/UX
     MAKE RESPONSIVE (minimum 1025px);
-    connect all the pieces (finish sidebar.js,)
-    Make help.js help video, edit.js
-    Make loading screen for posting.js when it runs (takes a while)
+    Make help.js help video
     Add the 500 words to the qualityarray in nlp.py (https://www.jobscan.co/blog/top-resume-keywords-boost-resume/)
     Bundle into .exe

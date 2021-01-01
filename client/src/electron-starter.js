@@ -206,3 +206,23 @@ ipcMain.on('edit-profile', async (event, profile, text) => {
         event.returnValue = "success";
     });
 });
+
+ipcMain.on('load-cv', async (event, profile) => {
+    let destinationDir = path.join(__dirname, `../profiles/${profile}`);
+    const data = fs.readFileSync(destinationDir.concat('/text.txt'), {encoding:'utf8', flag:'r'});
+    event.returnValue = data;
+});
+
+ipcMain.on('save-profile', async (event, oldProfile, newProfile, text) => {
+    let destinationDir = path.join(__dirname, `../profiles/${oldProfile}`);
+    let newDir = path.join(__dirname, `../profiles/${newProfile}`);
+    fs.writeFileSync(destinationDir.concat('/text.txt'), text);
+    fs.rename(destinationDir, newDir, function(err) {
+        if (err) {
+            event.returnValue = "failure";
+        } else {
+            event.returnValue = "success";
+        }
+    }); 
+    event.returnValue = 'success';
+});
