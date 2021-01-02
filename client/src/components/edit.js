@@ -17,7 +17,6 @@ function Edit({ setBodyShow, editedProfile, setEdited }) {
     function complete() {
         let newProfile = profileRef.current.value;
         let cv = textRef.current.value;
-        alert('starting');
         let bool = ipcRenderer.sendSync('save-profile', editedProfile, newProfile, cv);
         if(bool === "success") {
             setBodyShow([false, true, false, false]);
