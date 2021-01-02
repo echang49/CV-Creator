@@ -13,16 +13,6 @@ function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfi
     useEffect(() => {
         let array = ipcRenderer.sendSync('load-profiles');
         setProfiles(array);
-    }, []);
-
-    const isInitialEditMount = useRef(true);
-    useEffect(() => {
-        if (isInitialEditMount.current) {
-            isInitialEditMount.current = false;
-        } else {
-            let array = ipcRenderer.sendSync('load-profiles');
-            setProfiles(array);
-        }
     }, [edited]);
     
     function addItem() {

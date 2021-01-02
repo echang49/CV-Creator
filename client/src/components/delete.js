@@ -13,7 +13,7 @@ function Delete({ setPopupShow, mainRef, deleteProfile, setEdited }) {
     function confirmDelete(profile) {
         let bool = ipcRenderer.sendSync('delete-profile', profile);
         if(bool) {
-            setEdited(deleteProfile);
+            setEdited(ID());
             setPopupShow([false, false, false]);
             mainRef.current.classList.remove('blur');
         }
@@ -21,6 +21,10 @@ function Delete({ setPopupShow, mainRef, deleteProfile, setEdited }) {
             alert('Sorry! We ran into an error and was unable to delete the profile. If you would like to do it manually, please go into where you installed the program -> Client -> Profiles, and then delete your selected profile');
         }
     }
+
+    function ID() {
+        return '_' + Math.random().toString(36).substr(2, 9);
+    };
 
     return(
         <div className="popup" id="delete">

@@ -34,7 +34,7 @@ function Add({ setPopupShow, mainRef, setEdited }) {
             alert("Unfortunately, you happened to reach an unexpected error and we're not sure what to do.");
         }
         else if (cv[0] === "success") {
-            setEdited(profile);
+            setEdited(ID());
             setBool(false);
             setText(cv[1]);
         }
@@ -53,6 +53,10 @@ function Add({ setPopupShow, mainRef, setEdited }) {
             alert("Unfortunately, you happened to reach an unexpected error and we're not sure what to do.");
         }
     }
+
+    function ID() {
+        return '_' + Math.random().toString(36).substr(2, 9);
+    };
 
     return (
         <span>    

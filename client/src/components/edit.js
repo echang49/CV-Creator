@@ -20,7 +20,7 @@ function Edit({ setBodyShow, editedProfile, setEdited }) {
         let bool = ipcRenderer.sendSync('save-profile', editedProfile, newProfile, cv);
         if(bool === "success") {
             setBodyShow([false, true, false, false]);
-            setEdited(editedProfile); 
+            setEdited(ID()); 
         }
         else {
             alert("Unfortunately, you happened to reach an unexpected error and we're not sure what to do.");
@@ -30,6 +30,10 @@ function Edit({ setBodyShow, editedProfile, setEdited }) {
     function cancel() {
         setBodyShow([false, true, false, false]);
     }
+
+    function ID() {
+        return '_' + Math.random().toString(36).substr(2, 9);
+    };
 
     return (
         <div className="edit">
