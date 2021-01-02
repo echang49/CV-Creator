@@ -16,7 +16,7 @@ const BrowserWindow = electron.BrowserWindow;
 let mainWindow;
 
 function createWindow() {
-    mainWindow = new BrowserWindow({minWidth: 1920, minHeight: 1080, width:1920, height:1080, webPreferences: { nodeIntegration: true, enableRemoteModule: true }});
+    mainWindow = new BrowserWindow({minWidth: 1920, minHeight: 1080, icon: path.join(__dirname, './assets/logo.png'), webPreferences: { nodeIntegration: true, enableRemoteModule: true }});
     mainWindow.maximize();
     mainWindow.loadURL('http://localhost:3000');
     // mainWindow.loadURL(url.format({
