@@ -47,7 +47,6 @@ function Add({ setPopupShow, mainRef, setEdited }) {
         let input = textRef.current.value;
         let cv = ipcRenderer.sendSync('edit-profile', profileName, input);
         if(cv === "success") {
-            alert("Profile successfully created!");
             close();
         }
         else {
