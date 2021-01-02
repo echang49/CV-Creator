@@ -557,6 +557,14 @@ body {
       align-self: flex-end;
 }
 
+#help {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 1350px;
+  height: 850px;
+}
+
 .finished {
   display: -webkit-box;
   display: -ms-flexbox;

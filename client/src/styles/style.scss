@@ -385,6 +385,12 @@ body {
     }
 }
 
+#help {
+    display: flex;
+    width: 1350px;
+    height: 850px;
+}
+
 .finished {
     display: flex;
     flex-direction: column;

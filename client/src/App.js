@@ -5,6 +5,7 @@ import Add from "./components/add.js";
 import Delete from "./components/delete.js";
 import Finished from "./components/finished.js";
 import Edit from './components/edit.js';
+import HelpComp from './components/help.js';
 import {ReactComponent as Help} from "./assets/help.svg";
 import {ReactComponent as Help2} from "./assets/help-2.svg";
 
@@ -26,7 +27,8 @@ function App() {
   const mainRef = createRef();
 
   function help() {
-    alert('HELP!!')
+    mainRef.current.classList.add('blur');
+    setPopupShow([false, false, true]);
   }
 
   return (
@@ -86,6 +88,12 @@ function App() {
       {
         popupShow[1] ?
           <Delete setPopupShow={setPopupShow} mainRef={mainRef} deleteProfile={deleteProfile} setEdited={setEdited} />
+        :
+          <div />
+      }
+      {
+        popupShow[2] ?
+          <HelpComp setPopupShow={setPopupShow} mainRef={mainRef} />
         :
           <div />
       }
