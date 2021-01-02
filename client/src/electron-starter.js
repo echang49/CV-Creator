@@ -18,12 +18,12 @@ let mainWindow;
 function createWindow() {
     mainWindow = new BrowserWindow({minWidth: 1920, minHeight: 1080, icon: path.join(__dirname, './assets/logo.png'), webPreferences: { nodeIntegration: true, enableRemoteModule: true }});
     mainWindow.maximize();
-    mainWindow.loadURL('http://localhost:3000');
-    // mainWindow.loadURL(url.format({
-    //     pathname: path.join(__dirname, '/../build/index.html'),
-    //     protocol: 'file:',
-    //     slashes: true
-    // }));
+    // mainWindow.loadURL('http://localhost:3000');
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname, '/../build/index.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
     mainWindow.webContents.openDevTools();
     mainWindow.on('closed', function () {
         mainWindow = null
