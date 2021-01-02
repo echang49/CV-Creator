@@ -1,5 +1,4 @@
 TODO
-    Add scrollbar for the profiles so that they can scroll if they have too many
     Make help.js help video
     Bundle into .exe (HOW TO BUNDLE THE PYTHON VENV FOR PRODUCTION) https://packaging.python.org/overview/
     test (make sure components work, make sure the 500 words make sense)

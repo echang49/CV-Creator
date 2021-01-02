@@ -51,7 +51,7 @@
 
 $light: hsl(0,0,95);
 $dark-green: #2E557D;
-$light-green: #3A6678;
+$light-green: #4076AD;
 
 body {
     margin: 0;
@@ -126,6 +126,24 @@ body {
     }
 }
 
+#style-2::-webkit-scrollbar-track
+{
+  border-radius: 10px;
+  background-color: #D8FFFB;
+}
+
+#style-2::-webkit-scrollbar
+{
+  width: 12px;
+  background-color: transparent;
+}
+
+#style-2::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  background-color: #5B6A7C;
+}
+
 //Block
 
 .main {
@@ -162,6 +180,8 @@ body {
                 }
             }
             .sidebar-body {
+                overflow-y: scroll;
+                height: 75vh;
                 .list {
                     margin-right: 50px;
                     display: flex;
@@ -169,8 +189,13 @@ body {
                     justify-content: space-between;
                     align-items: center;
                     p {
+                        @media screen and (min-width: 2500px) {
+                            max-width: 20ch;
+                        }
+                        @media screen and (max-width: 2500px) {
+                            max-width: 13ch;
+                        }
                         margin: 7.5px 0;
-                        max-width: 20ch;
                         text-overflow: ellipsis;
                         white-space: nowrap;
                         overflow: hidden;

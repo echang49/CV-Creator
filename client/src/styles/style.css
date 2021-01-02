@@ -133,7 +133,7 @@ body {
 }
 
 .popup .flex-column button:hover {
-  background-color: #3A6678;
+  background-color: #4076AD;
 }
 
 .popup .flex-column .delete {
@@ -142,6 +142,21 @@ body {
       align-self: flex-end;
   -webkit-transform: translateX(40px);
           transform: translateX(40px);
+}
+
+#style-2::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #D8FFFB;
+}
+
+#style-2::-webkit-scrollbar {
+  width: 12px;
+  background-color: transparent;
+}
+
+#style-2::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #5B6A7C;
 }
 
 .main {
@@ -212,6 +227,11 @@ body {
   line-height: 4rem;
 }
 
+.sidebar .container .container-child .sidebar-body {
+  overflow-y: scroll;
+  height: 75vh;
+}
+
 .sidebar .container .container-child .sidebar-body .list {
   margin-right: 50px;
   display: -webkit-box;
@@ -231,10 +251,21 @@ body {
 
 .sidebar .container .container-child .sidebar-body .list p {
   margin: 7.5px 0;
-  max-width: 20ch;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+@media screen and (min-width: 2500px) {
+  .sidebar .container .container-child .sidebar-body .list p {
+    max-width: 20ch;
+  }
+}
+
+@media screen and (max-width: 2500px) {
+  .sidebar .container .container-child .sidebar-body .list p {
+    max-width: 13ch;
+  }
 }
 
 .sidebar .container .sidebar-footer {
@@ -421,7 +452,7 @@ body {
 }
 
 .posting .box button:hover {
-  background-color: #3A6678;
+  background-color: #4076AD;
 }
 
 .posting .box .posting-body {
@@ -568,7 +599,7 @@ body {
 }
 
 .finished button:hover {
-  background-color: #3A6678;
+  background-color: #4076AD;
 }
 
 .edit {
@@ -619,7 +650,7 @@ body {
 }
 
 .edit button:hover {
-  background-color: #3A6678;
+  background-color: #4076AD;
 }
 
 .edit .flex-row {

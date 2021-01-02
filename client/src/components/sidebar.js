@@ -55,7 +55,7 @@ function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfi
                         <Add className="icon mr-50" onClick={() => addItem()} />
                     </div>
                     <hr />
-                    <div className="sidebar-body">
+                    <div className="sidebar-body" id="style-2">
                         {
                             profiles.map((data) => 
                                 <div className="list">
