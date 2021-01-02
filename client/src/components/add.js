@@ -59,7 +59,7 @@ function Add({ setPopupShow, mainRef, setEdited }) {
         <span>    
             {
                 bool ?
-                    <div className="popup add1" id="add">
+                    <div className="popup" id="add">
                         <div className="flex-column">
                             <div className="delete">
                                 <Close onClick={() => close()} />
@@ -80,7 +80,7 @@ function Add({ setPopupShow, mainRef, setEdited }) {
                         </div>
                     </div>
                 :
-                    <div className="popup add2" id="add">
+                    <div className="popup" id="add" style={{width: '1500px', height: '750px'}}>
                         <div className="flex-column">
                             <div className="delete">
                                 <Close onClick={() => close()} />

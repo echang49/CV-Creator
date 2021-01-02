@@ -316,6 +316,8 @@ body {
 
 #add {
     display: flex;
+    width: 800px;
+    height: 375px;
     .flex-column {
         flex-grow: 1;
         .flex-row {
@@ -356,16 +358,6 @@ body {
     .button {
         align-self: flex-end;
     }
-}
-
-#add, .add1 {
-    width: 800px;
-    height: 375px;
-}
-
-#add, .add2 {
-    width: 1500px;
-    height: 750px;
 }
 
 .finished {
