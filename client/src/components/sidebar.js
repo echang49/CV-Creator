@@ -51,8 +51,8 @@ function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfi
             <div className="container">
                 <div className="container-child">
                     <div className="sidebar-header">
-                        <p className="title">CV Creator</p>
-                        <Add className="icon" onClick={() => addItem()} />
+                        <p className="title">CV<br />CREATOR</p>
+                        <Add className="icon mr-50" onClick={() => addItem()} />
                     </div>
                     <hr />
                     <div className="sidebar-body">
@@ -70,7 +70,7 @@ function Sidebar({setPopupShow, mainRef, setProfile, setBodyShow, setDeleteProfi
                     </div>
                 </div>
                 
-                <p className="sidebar-footer">Made by <a className="bold" href="https://echang.dev/" target="_blank" rel="noreferrer">Edward Chang</a>, <a className="bold" href="https://vmaken.dev/" target="_blank" rel="noreferrer">Vimal Makenthirarasa</a>, and <a className="bold" href="https://github.com/chriswan12" target="_blank" rel="noreferrer">Chris Wan</a>.</p>
+                <p className="sidebar-footer">Made by <a className="bold" href="https://echang.dev/" target="_blank" rel="noreferrer">Edward Chang</a>, <a className="bold" href="https://vmaken.dev/" target="_blank" rel="noreferrer">Vimal Makenthirarasa</a>, <a className="bold" href="https://github.com/chriswan12" target="_blank" rel="noreferrer">Chris Wan</a>, and Veronique Delage.</p>
             </div>
         </div>
     );

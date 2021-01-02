@@ -27,28 +27,31 @@ function Posting({ profile, setPosting, setBodyShow }) {
 
     return (
         <div className="posting">
-            <p className="title">{ profile }</p>
-            <div className="flex-row">
-                    <p>Please enter job posting here:</p>
-                    <button onClick={() => setShowURL(true)} >URL</button>
-                    <button onClick={() => setShowURL(false)} >Copy/Paste</button>
+            <div className="box">
+                <p className="title">{ profile }</p>
+                <hr />
+                <div className="flex-row">
+                        <p>Please enter job posting here:</p>
+                        <button onClick={() => setShowURL(true)} >URL</button>
+                        <button onClick={() => setShowURL(false)} >Copy/Paste</button>
+                    </div>
+                <div className="posting-body">
+                    
+                    {
+                        showURL ?
+                            <div>
+                                <label>URL: </label>
+                                <input type="text" ref={urlRef} />
+                                <button onClick={() => submitURL(urlRef.current.value)} >Submit</button>
+                            </div>
+                        :
+                            <div>
+                                <label>Copy/Paste: </label>
+                                <input type="text" ref={textRef} />
+                                <button onClick={() => submitText(textRef.current.value)} >Submit</button>
+                            </div>
+                    }
                 </div>
-            <div className="posting-body">
-                
-                {
-                    showURL ?
-                        <div>
-                            <label>URL: </label>
-                            <input type="text" ref={urlRef} />
-                            <button onClick={() => submitURL(urlRef.current.value)} >Submit</button>
-                        </div>
-                    :
-                        <div>
-                            <label>Copy/Paste: </label>
-                            <input type="text" ref={textRef} />
-                            <button onClick={() => submitText(textRef.current.value)} >Submit</button>
-                        </div>
-                }
             </div>
         </div>
     );

@@ -56,40 +56,44 @@ function Add({ setPopupShow, mainRef, setEdited }) {
     }
 
     return (
-        <div className="popup" id="add">
+        <span>    
             {
                 bool ?
-                    <div className="flex-column">
-                        <div className="delete">
-                            <Close onClick={() => close()} />
-                        </div>
-                        <p className="title">Create New Profile</p>
-                        <div className="flex-row">
-                            <label>Name: </label>
-                            <input type="text" ref={profileRef} />
+                    <div className="popup add1" id="add">
+                        <div className="flex-column">
+                            <div className="delete">
+                                <Close onClick={() => close()} />
+                            </div>
+                            <p className="title">Create New Profile</p>
+                            <div className="flex-row">
+                                <label>Name: </label>
+                                <input type="text" ref={profileRef} />
 
-                        </div>
-                        <div className="flex-row" style={{ flexGrow: 1 }}>
-                            <label>Upload Cover Letter: </label>
-                            <input type="file" ref={fileRef} />
-                        </div>
-                        <div className="button">
-                            <button onClick={() => next()} >Next</button>
+                            </div>
+                            <div className="flex-row" style={{ flexGrow: 1 }}>
+                                <label>Upload Cover Letter: </label>
+                                <input type="file" ref={fileRef} />
+                            </div>
+                            <div className="button">
+                                <button onClick={() => next()} >Next</button>
+                            </div>
                         </div>
                     </div>
                 :
-                    <div className="flex-column">
-                        <div className="delete">
-                            <Close onClick={() => close()} />
-                        </div>
-                        <p className="subtitle">The following is what the cover letter looks like in our system. Make sure to re-format it properly so that employers see a well formatted document. Add [NOUN], [VERB], and [ADJECTIVE] to where you think it would fit best. An example would be "I like to work. [NOUN][VERB][ADJECTIVE]"</p>
-                        <textarea ref={textRef} >{text}</textarea>
-                        <div className="button">
-                            <button onClick={() => create()} >Create</button>
+                    <div className="popup add2" id="add">
+                        <div className="flex-column">
+                            <div className="delete">
+                                <Close onClick={() => close()} />
+                            </div>
+                            <p className="subtitle">The following is what the cover letter looks like in our system.<br/>Make sure to re-format it properly so that employers see a well formatted document. Add [NOUN], [VERB], and [ADJECTIVE] to where you think it would fit best. An example would be "I like to work. [NOUN][VERB][ADJECTIVE]"</p>
+                            <textarea ref={textRef} >{text}</textarea>
+                            <div className="button">
+                                <button onClick={() => create()} >Create</button>
+                            </div>
                         </div>
                     </div>
             }
-        </div>
+        </span>
     );
 }
 

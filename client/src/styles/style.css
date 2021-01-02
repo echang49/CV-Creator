@@ -73,6 +73,10 @@ body {
   margin-right: 20px !important;
 }
 
+.mr-50 {
+  margin-right: 50px !important;
+}
+
 .icon:hover {
   cursor: pointer;
 }
@@ -93,8 +97,18 @@ body {
   right: 0;
   border-radius: 10px;
   margin: auto;
+  padding: 0 50px 50px 50px;
   -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
           box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .popup .flex-column {
@@ -110,11 +124,12 @@ body {
 .popup .flex-column button {
   all: unset;
   cursor: pointer;
-  padding: 10px 40px;
+  padding: 5px 30px;
   margin: 0 20px;
   border-radius: 10px;
   color: #f2f2f2;
-  background-color: #264653;
+  background-color: #2E557D;
+  font-size: 30px;
 }
 
 .popup .flex-column button:hover {
@@ -125,6 +140,8 @@ body {
   cursor: pointer;
   -ms-flex-item-align: end;
       align-self: flex-end;
+  -webkit-transform: translateX(40px);
+          transform: translateX(40px);
 }
 
 .main {
@@ -141,7 +158,7 @@ body {
   height: 100vh;
   width: 25vw;
   min-width: 450px;
-  background-color: #264653;
+  background-color: #2E557D;
   color: #FFF;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -149,7 +166,7 @@ body {
 }
 
 .sidebar .container {
-  padding: 25px 75px;
+  padding: 25px 25px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -188,14 +205,15 @@ body {
 }
 
 .sidebar .container .container-child .sidebar-header .title {
-  font-weight: 900;
-  letter-spacing: 5px;
-  font-size: 60px;
-  margin: 25px 0;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-size: 75px;
+  margin: 0;
+  line-height: 4rem;
 }
 
 .sidebar .container .container-child .sidebar-body .list {
-  margin-left: 50px;
+  margin-right: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -212,7 +230,7 @@ body {
 }
 
 .sidebar .container .container-child .sidebar-body .list p {
-  margin: 25px 0;
+  margin: 7.5px 0;
   max-width: 20ch;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -240,7 +258,6 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  padding: 25px 75px;
 }
 
 .body .body-default {
@@ -280,13 +297,16 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .help {
   z-index: 1;
   position: absolute;
-  bottom: 50px;
-  right: 100px;
+  bottom: 1.5vh;
+  right: 3vw;
 }
 
 .help:hover {
@@ -322,6 +342,28 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-image: url("../assets/bg-posting.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: relative;
+  background-size: cover;
+  height: 100vh;
+  width: 75vw;
+}
+
+.posting .box {
+  background-color: #FFF;
+  padding: 20px 50px;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -329,16 +371,25 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-filter: drop-shadow(5px 10px 10px #1a1a1a);
+          filter: drop-shadow(5px 10px 10px #1a1a1a);
 }
 
-.posting .title {
+.posting .box hr {
+  all: unset;
+  height: 1px;
+  width: 100%;
+  background-color: #333333;
+}
+
+.posting .box .title {
   font-weight: 600;
-  letter-spacing: 5px;
+  letter-spacing: 3px;
   font-size: 60px;
-  margin: 25px 0;
+  margin: 20px 0;
 }
 
-.posting .flex-row {
+.posting .box .flex-row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -347,33 +398,36 @@ body {
       -ms-flex-direction: row;
           flex-direction: row;
   margin-top: 50px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.posting button {
+.posting .box .flex-row p {
+  margin: 0;
+}
+
+.posting .box button {
   all: unset;
   cursor: pointer;
-  padding: 10px 40px;
+  padding: 10px 25px;
   margin: 0 20px;
   border-radius: 10px;
   color: #f2f2f2;
-  background-color: #264653;
+  background-color: #2E557D;
 }
 
-.posting button:hover {
+.posting .box button:hover {
   background-color: #3A6678;
 }
 
-.posting .posting-body {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+.posting .box .posting-body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -382,16 +436,15 @@ body {
           justify-content: center;
 }
 
-.posting .posting-body input[type=text] {
-  margin: 50px;
+.posting .box .posting-body input[type=text] {
+  margin: 50px 20px;
   font-size: 40px;
-  padding: 20px 50px;
+  padding: 5px 10px;
 }
 
 #delete {
   width: 500px;
-  height: 350px;
-  padding: 50px 100px;
+  height: 250px;
 }
 
 #delete .flex-column {
@@ -402,12 +455,10 @@ body {
 
 #delete p {
   text-align: center;
+  margin: 0 0 10px 0;
 }
 
 #add {
-  max-width: 1500px;
-  height: 700px;
-  padding: 50px 100px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -427,7 +478,6 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  margin-top: 10px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -438,6 +488,7 @@ body {
       -ms-grid-row-align: center;
       align-self: center;
   font-weight: 600;
+  margin: 0;
 }
 
 #add .subtitle {
@@ -447,15 +498,15 @@ body {
 }
 
 #add input[type=text] {
-  margin: 30px;
+  margin: 20px;
   font-size: 40px;
-  padding: 20px 50px;
+  padding: 5px 10px;
 }
 
 #add input[type=file] {
-  margin: 30px;
-  font-size: 40px;
-  padding: 20px 50px;
+  margin: 20px;
+  font-size: 30px;
+  padding: 5px 10px;
 }
 
 #add textarea {
@@ -465,11 +516,22 @@ body {
   font-family: 'PT Serif', serif;
   font-size: 20px;
   letter-spacing: 1px;
+  padding: 20px;
 }
 
 #add .button {
   -ms-flex-item-align: end;
       align-self: flex-end;
+}
+
+#add, .add1 {
+  width: 800px;
+  height: 375px;
+}
+
+#add, .add2 {
+  width: 1500px;
+  height: 750px;
 }
 
 .finished {
@@ -493,6 +555,7 @@ body {
   font-family: 'PT Serif', serif;
   font-size: 20px;
   letter-spacing: 1px;
+  padding: 20px;
 }
 
 .finished .title {
@@ -509,7 +572,7 @@ body {
   margin: 0 20px;
   border-radius: 10px;
   color: #f2f2f2;
-  background-color: #264653;
+  background-color: #2E557D;
 }
 
 .finished button:hover {
@@ -540,6 +603,7 @@ body {
   font-family: 'PT Serif', serif;
   font-size: 20px;
   letter-spacing: 1px;
+  padding: 20px;
 }
 
 .edit .title {
@@ -559,7 +623,7 @@ body {
   margin: 0 0;
   border-radius: 10px;
   color: #f2f2f2;
-  background-color: #264653;
+  background-color: #2E557D;
 }
 
 .edit button:hover {

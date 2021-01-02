@@ -6,6 +6,7 @@ import Delete from "./components/delete.js";
 import Finished from "./components/finished.js";
 import Edit from './components/edit.js';
 import {ReactComponent as Help} from "./assets/help.svg";
+import {ReactComponent as Help2} from "./assets/help-2.svg";
 
 import { useState, createRef } from 'react';
 
@@ -67,7 +68,13 @@ function App() {
           }
         </div>
         <div className="help">
-          <Help onClick={() => help()} />
+          {
+            bodyShow[1] ?
+              <Help2 onClick={() => help()} />
+            :
+              <Help onClick={() => help()} />
+          }
+          
         </div>
       </div>
       {

@@ -1,6 +1,7 @@
 TODO
-    Edit UI/UX
+    Add scrollbar for the profiles so that they can scroll if they have too many
     MAKE RESPONSIVE (minimum 1025px);
     Make help.js help video
     Add the 500 words to the qualityarray in nlp.py (https://www.jobscan.co/blog/top-resume-keywords-boost-resume/)
-    Bundle into .exe
+    Bundle into .exe (HOW TO BUNDLE THE PYTHON VENV FOR PRODUCTION) https://packaging.python.org/overview/
+    test
