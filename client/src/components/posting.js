@@ -9,20 +9,33 @@ function Posting({ profile, setPosting, setBodyShow }) {
     const textRef = createRef();
 
     async function submitURL(url) {
-        let cv = await script.main(url, profile);
-        if(cv === "NOT VALID URL") {
-            alert("Unfortunately, the URL posted is currently not supported. We currently only support indeed, the canada job bank (not CSJ), workday, and linkedin.");
+        //check if it's a valid url
+        // /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g
+        let bool = url.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/g);
+        if(bool) {
+            let cv = await script.main(url, profile);
+            if(cv === "NOT VALID URL") {
+                alert("Unfortunately, the URL posted is currently not supported. We currently only support indeed, the canada job bank (not CSJ), workday, and linkedin.");
+            }
+            else if (cv !== "HTTP/HTTPS") {
+                setBodyShow([false, false, false, true]);
+                setPosting(cv);
+            }
         }
         else {
-            setBodyShow([false, false, false, true]);
-            setPosting(cv);
+            alert('Please enter a valid URL');
         }
     }
 
     async function submitText(text) {
-        let cv = await script.secondary(text, profile);
-        setBodyShow([false, false, false, true]);
-        setPosting(cv);
+        if(text === ''){
+            alert('Please enter a job posting first.');
+        }
+        else {
+            let cv = await script.secondary(text, profile);
+            setBodyShow([false, false, false, true]);
+            setPosting(cv);
+        }
     }
 
     return (

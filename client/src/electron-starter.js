@@ -24,7 +24,7 @@ function createWindow() {
     //     protocol: 'file:',
     //     slashes: true
     // }));
-    //mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
     mainWindow.on('closed', function () {
         mainWindow = null
     })
@@ -110,7 +110,7 @@ ipcMain.on('create-cv', (event, sentences, profile) => {
     else {
         cv = cv.replace('[NOUN]', '');
     }
-    if(sentences[2] !== 'Lastly, I am also  . '){
+    if(sentences[2] !== 'I am also . '){
         cv = cv.replace('[ADJECTIVE]', sentences[2]);
     }
     else {

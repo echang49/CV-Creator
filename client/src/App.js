@@ -55,7 +55,7 @@ function App() {
           {
             bodyShow[2] ?
               <div className="body-finished">
-                <Edit setBodyShow={setBodyShow} editedProfile={editedProfile} setEdited={setEdited} />
+                <Edit setBodyShow={setBodyShow} editedProfile={editedProfile} setEdited={setEdited} setBodyShow={setBodyShow} setProfile={setProfile} />
               </div>
             :
               <div />
@@ -87,7 +87,7 @@ function App() {
       }
       {
         popupShow[1] ?
-          <Delete setPopupShow={setPopupShow} mainRef={mainRef} deleteProfile={deleteProfile} setEdited={setEdited} />
+          <Delete setPopupShow={setPopupShow} mainRef={mainRef} deleteProfile={deleteProfile} setEdited={setEdited} setBodyShow={setBodyShow} />
         :
           <div />
       }

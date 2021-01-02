@@ -6,13 +6,19 @@ const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
 
 async function main(url, profile) {
-    let text = await scrape(url)
-    //console.log(text);
-    if(text !== "NOT VALID URL"){
-        return secondary(text, profile);
+    if(url.substring(0,4) === "http") {
+        let text = await scrape(url)
+        //console.log(text);
+        if(text !== "NOT VALID URL"){
+            return secondary(text, profile);
+        }
+        else {
+            return "NOT VALID URL";
+        }
     }
     else {
-        return "NOT VALID URL";
+      alert('This URL format is not supported. Please ensure the URL starts with HTTP/HTTPS');
+      return "HTTP/HTTPS"
     }
 }
 

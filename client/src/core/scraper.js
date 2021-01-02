@@ -25,8 +25,7 @@ export default async function scrape(urlInput) {
     default:
       console.log("url not found in our database");
       return("NOT VALID URL");
-    //TODO: Send client message that url not found
-  }
+    }
 }
 
 //SCRAPING & API FUNCTIONS

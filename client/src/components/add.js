@@ -21,26 +21,37 @@ function Add({ setPopupShow, mainRef, setEdited }) {
 
     async function next() {
         let profile = profileRef.current.value;
-        let file = fileRef.current.files[0].path;
-        setProfileName(profile);
-        let cv = ipcRenderer.sendSync('add-profile', profile, file);
-        if(cv[0] === "PROFILE EXISTS!") {
-            alert("A profile already exists under this name. Please create a new profile with a unique name.");
-        }
-        else if (cv[0] === "NOT A VALID FILE!") {
-            alert("Unfortunately, this file type is not supported. We currently only support .docx, .pdf, and .txt files.");
-        }
-        else if (cv[0] === "UNEXPECTED ERROR") {
-            alert("Unfortunately, you happened to reach an unexpected error and we're not sure what to do.");
-        }
-        else if (cv[0] === "success") {
-            setEdited(ID());
-            setBool(false);
-            setText(cv[1]);
+        let file = fileRef.current;
+        if(file.files.length === 0) {
+            alert('You need to select a file before continuing.');
         }
         else {
-            alert("Unfortunately, you happened to reach an unexpected error and we're not sure what to do.");
-        }
+            file = file.files[0].path;
+            if(profile === '' || file === '') {
+                alert('You need to enter a name before continuing.');
+            }
+            else {
+                setProfileName(profile);
+                let cv = ipcRenderer.sendSync('add-profile', profile, file);
+                if(cv[0] === "PROFILE EXISTS!") {
+                    alert("A profile already exists under this name. Please create a new profile with a unique name.");
+                }
+                else if (cv[0] === "NOT A VALID FILE!") {
+                    alert("Unfortunately, this file type is not supported. We currently only support .docx, .pdf, and .txt files.");
+                }
+                else if (cv[0] === "UNEXPECTED ERROR") {
+                    alert("Unfortunately, you happened to reach an unexpected error and we're not sure what to do.");
+                }
+                else if (cv[0] === "success") {
+                    setEdited(ID());
+                    setBool(false);
+                    setText(cv[1]);
+                }
+                else {
+                    alert("Unfortunately, you happened to reach an unexpected error and we're not sure what to do.");
+                }
+            }
+        }  
     }
 
     async function create() {

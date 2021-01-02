@@ -4,7 +4,7 @@ import { useRef, useEffect } from 'react';
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
 
-function Edit({ setBodyShow, editedProfile, setEdited }) {
+function Edit({ setBodyShow, editedProfile, setEdited, setProfile }) {
     const textRef = useRef();
     const profileRef = useRef();
 
@@ -20,6 +20,7 @@ function Edit({ setBodyShow, editedProfile, setEdited }) {
         let bool = ipcRenderer.sendSync('save-profile', editedProfile, newProfile, cv);
         if(bool === "success") {
             setBodyShow([false, true, false, false]);
+            setProfile(newProfile);
             setEdited(ID()); 
         }
         else {
@@ -29,6 +30,7 @@ function Edit({ setBodyShow, editedProfile, setEdited }) {
 
     function cancel() {
         setBodyShow([false, true, false, false]);
+        setProfile(editedProfile);
     }
 
     function ID() {
