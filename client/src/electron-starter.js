@@ -76,12 +76,11 @@ ipcMain.on('load-url', (event, url) => {
 ipcMain.on('load-python', (event, text) => {
     let options = {
         mode: 'text',
-        pythonPath : path.join(__dirname, '/core/env/Scripts/python'),
-        scriptPath : path.join(__dirname, '/core/'),
+        scriptPath : path.join(__dirname, '/core/nlp'),
         pythonOptions: ['-u'], // get print results in real-time
         args: [text]
     };
-    PythonShell.run('nlp.py', options, (err, results) => {
+    PythonShell.run('nlp.exe', options, (err, results) => {
         if (err)  throw err;
         let newData = results[0];
         newData = newData.replace(/],/gi, "]~").replace(']]',']').replace('[[','[').replace(/, /gi, ":").trim(); 
