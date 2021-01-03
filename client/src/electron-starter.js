@@ -3,7 +3,11 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+
+const { execFile } = require('child_process');
 const { PythonShell } =  require('python-shell');
+
+
 var Docxtemplater = require('docxtemplater');
 const PDFExtract = require('pdf.js-extract').PDFExtract;
 const PizZip = require('pizzip');
@@ -74,24 +78,27 @@ ipcMain.on('load-url', (event, url) => {
 })
 
 ipcMain.on('load-python', (event, text) => {
-    let options = {
-        mode: 'text',
-        scriptPath : path.join(__dirname, '/core/nlp'),
-        pythonOptions: ['-u'], // get print results in real-time
-        args: [text]
-    };
-    PythonShell.run('nlp.exe', options, (err, results) => {
-        if (err)  throw err;
-        let newData = results[0];
-        newData = newData.replace(/],/gi, "]~").replace(']]',']').replace('[[','[').replace(/, /gi, ":").trim(); 
-        newData = newData.split("~ ");
-        for(let i in newData) {
-            newData[i] = newData[i].replace('[','').replace(']','').replace(/\'/gi,'');
-            let temp = newData[i].split(":");
-            newData[i] = [temp[0], temp[1]];
-        }
-        event.returnValue = newData;
+    execFile(path.join(__dirname, '/core/dist/nlp/nlp.exe'), [text], (err, stdout, stderr) => {
+        console.log(err, stdout, stderr);
     });
+    // let options = {
+    //     mode: 'text',
+    //     pythonPath : path.join(__dirname, '/core/nlp/nlp.exe'),
+    //     pythonOptions: ['-u'], // get print results in real-time
+    //     args: [text]
+    // };
+    // PythonShell.run(' ', options, (err, results) => {
+    //     if (err)  throw err;
+    //     let newData = results[0];
+    //     newData = newData.replace(/],/gi, "]~").replace(']]',']').replace('[[','[').replace(/, /gi, ":").trim(); 
+    //     newData = newData.split("~ ");
+    //     for(let i in newData) {
+    //         newData[i] = newData[i].replace('[','').replace(']','').replace(/\'/gi,'');
+    //         let temp = newData[i].split(":");
+    //         newData[i] = [temp[0], temp[1]];
+    //     }
+    //     event.returnValue = newData;
+    // });
 })
 
 ipcMain.on('create-cv', (event, sentences, profile) => {
